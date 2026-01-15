@@ -1,79 +1,76 @@
-# Personal Website - Ricky Johnson Ganta
+# Personal Website
 
-A clean, professional personal website showcasing my experience as an ML / AI Engineer and Data Scientist.
+My professional portfolio website showcasing my work as an ML / AI Engineer and Data Scientist. Built with a focus on clarity and performance.
 
-## Features
+## Overview
 
-- **Clean & Professional Design**: Simple, recruiter-friendly layout optimized for job applications
-- **Mobile Responsive**: Works seamlessly on all devices
-- **Fast Loading**: Lightweight with no heavy dependencies
-- **ATS-Friendly**: Semantic HTML structure for better parsing
-- **Auto-Deployment**: GitHub Actions automatically deploys to GitHub Pages
+This is a clean, minimal personal website designed to highlight my technical expertise, projects, and professional background. The site is optimized for recruiters and hiring managers, with fast load times and a mobile-responsive design.
+
+## Design Philosophy
+
+I designed this website with the following principles in mind:
+
+- **Simplicity**: Clean, uncluttered interface that puts content first
+- **Performance**: Lightweight vanilla HTML/CSS/JS for fast loading
+- **Accessibility**: Semantic HTML structure for better parsing
+- **Responsiveness**: Mobile-first design that works on all devices
+- **Professionalism**: Recruiter-focused layout without unnecessary animations
 
 ## Tech Stack
 
-- HTML5
-- CSS3 (Vanilla)
-- JavaScript (Vanilla)
-- GitHub Pages (Hosting)
-- GitHub Actions (CI/CD)
+- **Frontend**: HTML5, CSS3, Vanilla JavaScript
+- **Hosting**: GitHub Pages
+- **CI/CD**: GitHub Actions for automatic deployment
+- **Fonts**: Inter (Google Fonts)
 
-## Project Structure
+## Architecture
+
+The site follows a simple, maintainable structure:
 
 ```
-My website/
-├── index.html              # Main landing page
+├── index.html              # Single-page application
 ├── assets/
-│   ├── css/
-│   │   └── style.css      # All styling
-│   └── js/
-│       └── main.js        # Interactive features
+│   ├── css/style.css      # Modular CSS with CSS variables
+│   └── js/main.js         # Smooth scrolling and navigation
 ├── resume/
-│   └── resume.pdf         # Resume PDF (add your file here)
-├── .github/
-│   └── workflows/
-│       └── deploy.yml     # GitHub Actions workflow
-└── README.md              # This file
+│   └── resume.pdf         # Downloadable resume
+└── .github/workflows/
+    └── deploy.yml         # Automated deployment pipeline
 ```
 
-## Setup Instructions
+## Features
 
-1. **Clone or download this repository**
+- **Hero Section**: Clear introduction with name, role, and call-to-action
+- **About Section**: Career-focused background and expertise
+- **Projects Section**: Showcase of key ML/AI projects with GitHub links
+- **Skills Section**: Technical stack organized by category
+- **Resume Download**: Direct PDF download link
+- **Contact Section**: Email, LinkedIn, and GitHub links
+- **Smooth Navigation**: Sticky navbar with active section highlighting
 
-2. **Add your resume PDF**
-   - Place your resume PDF file in the `resume/` directory
-   - Name it `resume.pdf`
+## Deployment
 
-3. **Update project information**
-   - Edit `index.html` to add your actual projects
-   - Update project titles, descriptions, and GitHub links
-   - Remove placeholder project cards or replace with real ones
+The site is automatically deployed to GitHub Pages via GitHub Actions on every push to the `main` branch. The deployment workflow is configured in `.github/workflows/deploy.yml`.
 
-4. **Deploy to GitHub Pages**
-   - Push this repository to GitHub
-   - Go to Settings → Pages in your GitHub repository
-   - Select source: "GitHub Actions"
-   - The workflow will automatically deploy on every push to main/master
+**Live Site**: [rickyganta.github.io/Personal_Website](https://rickyganta.github.io/Personal_Website)
 
 ## Customization
 
-### Update Projects
-Edit the project cards in `index.html` (lines ~60-100):
-- Replace "Project Title" with your actual project names
-- Update descriptions
-- Add correct GitHub repository links
-- Update technology tags
+The design uses CSS variables for easy theming. Key variables are defined in `assets/css/style.css`:
 
-### Update Colors
-Edit CSS variables in `assets/css/style.css` (lines ~8-15):
-- `--primary-color`: Main brand color
+- `--primary-color`: Brand color (currently blue)
 - `--text-primary`: Main text color
 - `--bg-primary`: Background color
+- `--max-width`: Content width constraint
 
-### Add Profile Photo
-1. Add your photo to `assets/images/`
-2. Update the hero section in `index.html` to include an `<img>` tag
+## Browser Support
+
+Tested and optimized for:
+- Chrome/Edge (latest)
+- Firefox (latest)
+- Safari (latest)
+- Mobile browsers (iOS Safari, Chrome Mobile)
 
 ## License
 
-This project is open source and available for personal use.
+Personal use only. All rights reserved.
