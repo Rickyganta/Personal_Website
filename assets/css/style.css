@@ -114,14 +114,23 @@
 
 /* Initial hidden state for scroll animations */
 .scroll-reveal {
-    opacity: 1;
-    transform: translateY(0);
+    opacity: 0;
+    transform: translateY(30px);
     transition: opacity 0.8s ease-out, transform 0.8s ease-out;
 }
 
 .scroll-reveal.revealed {
     opacity: 1;
     transform: translateY(0);
+}
+
+/* Skills section - always visible */
+.skills-content,
+.skills-category,
+.skills-tags,
+.skill-tag {
+    opacity: 1 !important;
+    transform: none !important;
 }
 
 .scroll-reveal-delay-1 {
