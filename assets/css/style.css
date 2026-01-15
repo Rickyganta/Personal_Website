@@ -124,13 +124,34 @@
     transform: translateY(0);
 }
 
-/* Skills section - always visible */
-.skills-content,
-.skills-category,
-.skills-tags,
+/* Skills section - always visible, no animations that hide content */
+.skills-content {
+    opacity: 1 !important;
+    transform: none !important;
+    visibility: visible !important;
+    display: block !important;
+}
+
+.skills-category {
+    opacity: 1 !important;
+    transform: none !important;
+    visibility: visible !important;
+    display: block !important;
+}
+
+.skills-tags {
+    opacity: 1 !important;
+    transform: none !important;
+    visibility: visible !important;
+    display: flex !important;
+}
+
 .skill-tag {
     opacity: 1 !important;
     transform: none !important;
+    visibility: visible !important;
+    display: inline-block !important;
+    animation: none !important;
 }
 
 .scroll-reveal-delay-1 {
