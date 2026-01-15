@@ -76,7 +76,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }, observerOptions);
     
-    const revealElements = document.querySelectorAll('.section-title, .about-content, .project-card, .skills-category, .resume-content, .contact-content');
+    const revealElements = document.querySelectorAll('.section-title, .about-content, .project-card, .resume-content, .contact-content');
     
     revealElements.forEach((el, index) => {
         el.classList.add('scroll-reveal');
@@ -86,6 +86,13 @@ document.addEventListener('DOMContentLoaded', function() {
             el.classList.add('scroll-reveal-delay-2');
         }
         observer.observe(el);
+    });
+    
+    // Skills section - ensure all elements are visible immediately
+    const skillsElements = document.querySelectorAll('.skills-content, .skills-category, .skills-tags, .skill-tag');
+    skillsElements.forEach(el => {
+        el.style.opacity = '1';
+        el.style.transform = 'none';
     });
     
     const projectCards = document.querySelectorAll('.project-card');
