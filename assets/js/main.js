@@ -1,21 +1,14 @@
-// Smooth scroll for navigation links and animations
 document.addEventListener('DOMContentLoaded', function() {
-    // Handle smooth scrolling for anchor links
     const navLinks = document.querySelectorAll('a[href^="#"]');
     
     navLinks.forEach(link => {
         link.addEventListener('click', function(e) {
             const href = this.getAttribute('href');
-            
-            // Skip if it's just "#"
             if (href === '#') return;
             
             const target = document.querySelector(href);
-            
             if (target) {
                 e.preventDefault();
-                
-                // Calculate offset for fixed navbar
                 const navbarHeight = document.querySelector('.navbar').offsetHeight;
                 const targetPosition = target.offsetTop - navbarHeight;
                 
@@ -27,7 +20,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Navbar scroll effect
     const navbar = document.querySelector('.navbar');
     let lastScroll = 0;
     
@@ -43,13 +35,12 @@ document.addEventListener('DOMContentLoaded', function() {
         lastScroll = currentScroll;
     });
     
-    // Add active state to navigation on scroll
     const sections = document.querySelectorAll('.section');
     const navItems = document.querySelectorAll('.nav-links a');
     
     function updateActiveNav() {
         let current = '';
-        const scrollPosition = window.pageYOffset + 150; // Offset for navbar
+        const scrollPosition = window.pageYOffset + 150;
         
         sections.forEach(section => {
             const sectionTop = section.offsetTop;
@@ -68,13 +59,9 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Update on scroll
     window.addEventListener('scroll', updateActiveNav);
-    
-    // Initial call
     updateActiveNav();
     
-    // Scroll reveal animations
     const observerOptions = {
         threshold: 0.1,
         rootMargin: '0px 0px -50px 0px'
@@ -89,7 +76,6 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }, observerOptions);
     
-    // Add scroll reveal to elements
     const revealElements = document.querySelectorAll('.section-title, .about-content, .project-card, .skills-category, .resume-content, .contact-content');
     
     revealElements.forEach((el, index) => {
@@ -102,19 +88,16 @@ document.addEventListener('DOMContentLoaded', function() {
         observer.observe(el);
     });
     
-    // Stagger animation for project cards
     const projectCards = document.querySelectorAll('.project-card');
     projectCards.forEach((card, index) => {
         card.style.animationDelay = `${index * 0.15}s`;
     });
     
-    // Stagger animation for skill tags
     const skillTags = document.querySelectorAll('.skill-tag');
     skillTags.forEach((tag, index) => {
         tag.style.animationDelay = `${(index % 6) * 0.1}s`;
     });
     
-    // Parallax effect for hero section (subtle)
     window.addEventListener('scroll', function() {
         const scrolled = window.pageYOffset;
         const hero = document.querySelector('.hero');
