@@ -534,8 +534,20 @@ body {
 .projects-note {
     text-align: center;
     color: var(--text-secondary);
-    font-size: 0.9rem;
-    margin-top: 2rem;
+    font-size: 0.95rem;
+    margin: -1rem auto 2rem;
+    max-width: 640px;
+    line-height: 1.6;
+}
+
+.projects-note a {
+    color: var(--primary-color);
+    font-weight: 500;
+    text-decoration: none;
+}
+
+.projects-note a:hover {
+    text-decoration: underline;
 }
 
 @media (max-width: 640px) {
@@ -742,3 +754,251 @@ body {
 .mb-1 { margin-bottom: 0.5rem; }
 .mb-2 { margin-bottom: 1rem; }
 .mb-3 { margin-bottom: 1.5rem; }
+
+/* ============================================
+   Case studies
+   ============================================ */
+#case-studies .section-title {
+    display: block;
+    text-align: center;
+}
+
+.case-studies-lead {
+    text-align: center;
+    color: var(--text-secondary);
+    max-width: 720px;
+    margin: -0.5rem auto 2.5rem;
+    font-size: 1.0625rem;
+    line-height: 1.7;
+}
+
+.case-study {
+    max-width: 880px;
+    margin: 0 auto 3.5rem;
+    padding: 2rem 2rem 2.25rem;
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 0.75rem;
+    box-shadow: var(--shadow-sm);
+}
+
+.case-study:last-of-type {
+    margin-bottom: 0;
+}
+
+.case-study-alt {
+    background: var(--bg-secondary);
+}
+
+.case-study-kicker {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--primary-color);
+    margin-bottom: 0.5rem;
+}
+
+.case-study-title {
+    font-size: 1.65rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    line-height: 1.25;
+    margin-bottom: 0.35rem;
+}
+
+.case-study-subtitle {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    margin-bottom: 1.5rem;
+}
+
+.case-study-heading {
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 1.5rem 0 0.65rem;
+}
+
+.case-study-body {
+    color: var(--text-secondary);
+    font-size: 1.0625rem;
+    line-height: 1.75;
+    margin-bottom: 0.25rem;
+}
+
+.case-study-list {
+    margin: 0.75rem 0 0 1.25rem;
+    color: var(--text-secondary);
+    font-size: 1.0625rem;
+    line-height: 1.75;
+}
+
+.case-study-list li {
+    margin-bottom: 0.5rem;
+}
+
+.inline-code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+    font-size: 0.9em;
+    background: var(--bg-secondary);
+    padding: 0.12rem 0.35rem;
+    border-radius: 0.25rem;
+    border: 1px solid var(--border-color);
+}
+
+.architecture-figure {
+    margin: 1rem 0 0.5rem;
+}
+
+.architecture-diagram {
+    background: linear-gradient(180deg, #ffffff 0%, #f9fafb 100%);
+    border: 1px solid var(--border-color);
+    border-radius: 0.65rem;
+    padding: 1rem;
+    overflow-x: auto;
+}
+
+.architecture-diagram--tall {
+    max-width: 440px;
+    margin: 0 auto;
+}
+
+.architecture-diagram svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    min-width: 520px;
+}
+
+.architecture-diagram--tall svg {
+    min-width: 0;
+}
+
+.architecture-caption {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin-top: 0.65rem;
+    line-height: 1.5;
+}
+
+.case-study-visual {
+    margin: 1.25rem 0;
+}
+
+.case-study-screenshot {
+    display: block;
+    width: 100%;
+    max-width: 960px;
+    height: auto;
+    margin: 0 auto;
+    border-radius: 0.5rem;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-md);
+}
+
+.case-study-visual-fallback {
+    background: var(--bg-secondary);
+    border: 1px dashed var(--border-color);
+    border-radius: 0.65rem;
+    padding: 1.25rem 1.5rem;
+    color: var(--text-secondary);
+}
+
+.case-study-visual-fallback[hidden] {
+    display: none !important;
+}
+
+.fallback-title {
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    font-size: 1rem;
+}
+
+.fallback-note {
+    margin-top: 1rem;
+    font-size: 0.875rem;
+    color: var(--text-secondary);
+}
+
+.metrics-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 0.75rem;
+}
+
+.metric-card {
+    background: var(--bg-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    padding: 0.75rem 1rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.metric-label {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--text-secondary);
+}
+
+.metric-value {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.case-study-visual--split {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.25rem;
+    align-items: start;
+}
+
+@media (max-width: 768px) {
+    .case-study-visual--split {
+        grid-template-columns: 1fr;
+    }
+}
+
+.screenshot-block {
+    margin: 0;
+}
+
+.screenshot-block figcaption {
+    font-size: 0.85rem;
+    color: var(--text-secondary);
+    margin-top: 0.5rem;
+    text-align: center;
+}
+
+.case-study-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.75rem;
+    margin-top: 1.75rem;
+    max-width: 520px;
+}
+
+.btn-cta-large {
+    text-align: center;
+    padding: 1rem 1.5rem;
+    font-size: 1.05rem;
+    font-weight: 600;
+}
+
+@media (min-width: 640px) {
+    .case-study-actions {
+        max-width: none;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+
+    .btn-cta-large {
+        flex: 1 1 240px;
+    }
+}

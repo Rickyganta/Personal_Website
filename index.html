@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Ricky Johnson Ganta - ML / AI Engineer | Data Scientist. Building production-grade machine learning systems and analytics solutions.">
+    <meta name="description" content="Ricky Johnson Ganta - ML / AI Engineer | Data Scientist. Case studies: real-time recommendation API at scale, multi-agent LangGraph research assistant.">
     <title>Ricky Johnson Ganta | ML / AI Engineer | Data Scientist</title>
     <link rel="stylesheet" href="assets/css/style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -18,6 +18,7 @@
             <ul class="nav-links">
                 <li><a href="#about">About</a></li>
                 <li><a href="#projects">Projects</a></li>
+                <li><a href="#case-studies">Case Studies</a></li>
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#resume">Resume</a></li>
                 <li><a href="#contact">Contact</a></li>
@@ -62,14 +63,44 @@
     <section id="projects" class="section section-alt">
         <div class="container">
             <h2 class="section-title scroll-reveal">Key Projects</h2>
+            <p class="projects-note scroll-reveal">Deep dives with architecture, load-test proof, and live demos are in <a href="#case-studies">Case Studies</a> below.</p>
             <div class="projects-grid">
+                <div class="project-card">
+                    <h3 class="project-title">Real-Time ML Recommendation API</h3>
+                    <p class="project-description">
+                        FastAPI service on MovieLens with Postgres, Redis-backed precomputed lists, hybrid collaborative + content scoring, Prometheus metrics, Locust load tests, and an A/B testing harness with significance testing on CTR.
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">FastAPI</span>
+                        <span class="tech-tag">Redis</span>
+                        <span class="tech-tag">PostgreSQL</span>
+                        <span class="tech-tag">Locust</span>
+                        <span class="tech-tag">Python</span>
+                    </div>
+                    <a href="#case-study-rtml" class="project-link">Read case study →</a>
+                    <a href="https://github.com/Rickyganta/RealTime-ML-API" target="_blank" rel="noopener noreferrer" class="project-link" style="margin-top: 0.5rem;">GitHub →</a>
+                </div>
+                <div class="project-card">
+                    <h3 class="project-title">Multi-Agent Research Assistant</h3>
+                    <p class="project-description">
+                        LangGraph orchestration: planner, parallel web researchers, critic loop, synthesizer, citation check, and editor—Streamlit UI with SQLite trace logging and strict cost caps.
+                    </p>
+                    <div class="project-tech">
+                        <span class="tech-tag">LangGraph</span>
+                        <span class="tech-tag">Streamlit</span>
+                        <span class="tech-tag">SQLite</span>
+                        <span class="tech-tag">OpenAI-compatible LLMs</span>
+                    </div>
+                    <a href="#case-study-mara" class="project-link">Read case study →</a>
+                    <a href="https://github.com/Rickyganta/Multi_Agent_Research_Assistant" target="_blank" rel="noopener noreferrer" class="project-link" style="margin-top: 0.5rem;">GitHub →</a>
+                </div>
                 <div class="project-card">
                     <h3 class="project-title">Retail Demand Forecasting (Time Series + MLOps)</h3>
                     <p class="project-description">
-                        Built an end-to-end retail demand forecasting pipeline using SARIMAX and Prophet, evaluated with walk-forward cross-validation and strong baselines (naive, seasonal naive). Implemented robust metrics (sMAPE, WAPE, MASE), target transformations, and experiment tracking with MLflow. Deployed a lightweight FastAPI service for generating forecasts.
+                        End-to-end retail demand forecasting with SARIMAX and Prophet, walk-forward validation, MLflow tracking, and a FastAPI forecasting service.
                     </p>
                     <p class="project-description" style="margin-top: 0.5rem; font-style: italic; color: var(--text-secondary);">
-                        Key insight: Seasonal naive outperformed complex models, showing the importance of strong baselines in real-world forecasting. Best model achieved 17.34% sMAPE on rolling validation.
+                        Key insight: Strong baselines matter—seasonal naive beat several complex models; best model reached 17.34% sMAPE on rolling validation.
                     </p>
                     <div class="project-tech">
                         <span class="tech-tag">Python</span>
@@ -77,13 +108,162 @@
                         <span class="tech-tag">Prophet</span>
                         <span class="tech-tag">MLflow</span>
                         <span class="tech-tag">FastAPI</span>
-                        <span class="tech-tag">Pandas</span>
                     </div>
-                    <a href="https://github.com/Rickyganta/retail-demand-forecasting" target="_blank" rel="noopener noreferrer" class="project-link">
-                        View on GitHub →
-                    </a>
+                    <a href="https://github.com/Rickyganta/retail-demand-forecasting" target="_blank" rel="noopener noreferrer" class="project-link">View on GitHub →</a>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- Case Studies -->
+    <section id="case-studies" class="section">
+        <div class="container">
+            <h2 class="section-title scroll-reveal">Case Studies</h2>
+            <p class="case-studies-lead scroll-reveal">Recruiters cannot click a private “live demo” behind auth—these pages summarize the problem, architecture, proof, and where to read the code.</p>
+
+            <article id="case-study-rtml" class="case-study scroll-reveal">
+                <p class="case-study-kicker">Production ML systems</p>
+                <h3 class="case-study-title">Scaling a Recommendation API to ~1,000 Requests per Second</h3>
+                <p class="case-study-subtitle">Real-Time ML Recommendation Engine · FastAPI, Redis, PostgreSQL, Locust, Python</p>
+
+                <h4 class="case-study-heading">The problem</h4>
+                <p class="case-study-body">
+                    Serving personalized recommendations by recomputing heavy collaborative and content scores on every request does not survive bursty traffic. The goal was a read path that stays fast and stable while training, ingestion, and retrain jobs run on their own schedule—closer to how product teams ship recommenders in practice.
+                </p>
+
+                <h4 class="case-study-heading">Architecture</h4>
+                <p class="case-study-body">
+                    Ratings and catalog data live in <strong>PostgreSQL</strong>. Ingest and <strong>offline/nightly retrain</strong> jobs read that ground truth, fit models (hybrid collaborative + content scoring in the online stack), and materialize ranked lists into <strong>Redis</strong>. The <strong>FastAPI</strong> app serves <code>GET /recommendations/{user_id}</code> from precomputed lists and cache-friendly paths so the hot read path avoids redoing full model math per request.
+                </p>
+                <figure class="architecture-figure" aria-label="Architecture from Postgres through offline jobs to Redis and FastAPI">
+                    <div class="architecture-diagram" role="img">
+                        <svg viewBox="0 0 920 200" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <defs>
+                                <marker id="arrow-rtml" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+                                    <path d="M0,0 L0,6 L9,3 z" fill="#2563eb"/>
+                                </marker>
+                            </defs>
+                            <rect x="20" y="40" width="160" height="100" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+                            <text x="100" y="82" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="600" fill="#1f2937">PostgreSQL</text>
+                            <text x="100" y="104" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#4b5563">Ratings · movies · users</text>
+                            <line x1="180" y1="90" x2="248" y2="90" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow-rtml)"/>
+                            <rect x="250" y="30" width="200" height="120" rx="10" fill="#f9fafb" stroke="#6b7280" stroke-width="2" stroke-dasharray="6 4"/>
+                            <text x="350" y="70" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="600" fill="#1f2937">Offline / batch</text>
+                            <text x="350" y="92" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#4b5563">Ingest · retrain job</text>
+                            <text x="350" y="112" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#4b5563">(sklearn hybrid + TF–IDF)</text>
+                            <line x1="450" y1="90" x2="518" y2="90" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow-rtml)"/>
+                            <rect x="520" y="40" width="160" height="100" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+                            <text x="600" y="82" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="600" fill="#1f2937">Redis</text>
+                            <text x="600" y="104" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#4b5563">Precomputed lists + cache</text>
+                            <line x1="680" y1="90" x2="748" y2="90" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow-rtml)"/>
+                            <rect x="750" y="40" width="150" height="100" rx="10" fill="#1e40af" stroke="#1e3a8a" stroke-width="2"/>
+                            <text x="825" y="82" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="600" fill="#ffffff">FastAPI</text>
+                            <text x="825" y="104" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="11" fill="#dbeafe">Low-latency reads</text>
+                        </svg>
+                    </div>
+                    <figcaption class="architecture-caption">Data flows from Postgres through batch/retrain into Redis; the API serves reads from in-memory materialized state.</figcaption>
+                </figure>
+
+                <h4 class="case-study-heading">What I shipped</h4>
+                <ul class="case-study-list">
+                    <li>Two-stage pattern: offline training / retrain decoupled from the always-on read API.</li>
+                    <li>Redis-backed materialization so recommendation retrieval stays an in-memory lookup on the hot path.</li>
+                    <li>Read-heavy Locust runs: <strong>~1,000 RPS</strong>, <strong>p95 ~56&nbsp;ms</strong>, <strong>0 failures</strong> over more than a million requests (local benchmark; see repo docs).</li>
+                    <li>A/B harness with deterministic hash bucketing and <strong>two-proportion z-test</strong> style significance for CTR (see <code>app/services/statsig.py</code> in the repo).</li>
+                </ul>
+
+                <h4 class="case-study-heading">Proof (load test)</h4>
+                <p class="case-study-body">Drop your cropped Locust stats PNG next to the site as <code class="inline-code">assets/img/case-studies/locust-stats.png</code> to mirror the README benchmark figure. Until then, the table below reflects the same recorded run documented in the repository.</p>
+                <div class="case-study-visual">
+                    <img src="assets/img/case-studies/locust-stats.png" alt="Locust statistics table showing ~1000 RPS, p95 near 56 ms, and zero failures" class="case-study-screenshot" width="960" height="540" loading="lazy">
+                    <div class="case-study-visual-fallback" data-fallback-for="locust" hidden>
+                        <p class="fallback-title">Read path benchmark (documented run)</p>
+                        <div class="metrics-grid">
+                            <div class="metric-card"><span class="metric-label">Requests (aggregated)</span><span class="metric-value">1,164,035</span></div>
+                            <div class="metric-card"><span class="metric-label">Failures</span><span class="metric-value">0</span></div>
+                            <div class="metric-card"><span class="metric-label">Median</span><span class="metric-value">11 ms</span></div>
+                            <div class="metric-card"><span class="metric-label">p95</span><span class="metric-value">56 ms</span></div>
+                            <div class="metric-card"><span class="metric-label">p99</span><span class="metric-value">89 ms</span></div>
+                            <div class="metric-card"><span class="metric-label">RPS (reported)</span><span class="metric-value">~1,000</span></div>
+                        </div>
+                        <p class="fallback-note">Source: <code class="inline-code">docs/benchmark_results.md</code> in the GitHub repo. Re-run with <code class="inline-code">make loadtest-read</code>.</p>
+                    </div>
+                </div>
+
+                <div class="case-study-actions">
+                    <a href="https://github.com/Rickyganta/RealTime-ML-API" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-cta-large">View the code &amp; architecture on GitHub</a>
+                    <a href="https://realtime-ml-api-jvipupgjire8oignx6v6o2.streamlit.app" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-cta-large">Open Streamlit dashboard (live)</a>
+                </div>
+            </article>
+
+            <article id="case-study-mara" class="case-study case-study-alt scroll-reveal">
+                <p class="case-study-kicker">Agents &amp; orchestration</p>
+                <h3 class="case-study-title">Orchestrating AI: a multi-agent LangGraph architecture</h3>
+                <p class="case-study-subtitle">Multi-Agent Research Assistant · LangGraph, OpenAI-compatible APIs, Streamlit, SQLite</p>
+
+                <h4 class="case-study-heading">The workflow</h4>
+                <p class="case-study-body">
+                    Given a research question, a <strong>planner</strong> decomposes it into sub-questions. <strong>Researchers</strong> fan out in parallel (web search + summarization), results <strong>aggregate</strong>, a <strong>critic</strong> judges coverage and evidence and can request more retrieval, then a <strong>synthesizer</strong> drafts cited prose, a <strong>citation check</strong> pass runs, and an <strong>editor</strong> ships the final Markdown report—with bounded loops so the graph cannot spin forever.
+                </p>
+                <figure class="architecture-figure" aria-label="LangGraph-style flow from user query to final report">
+                    <div class="architecture-diagram architecture-diagram--tall" role="img">
+                        <svg viewBox="0 0 420 520" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                            <defs>
+                                <marker id="arrow-mara" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="#2563eb"/></marker>
+                                <marker id="arrow-mara-loop" markerWidth="8" markerHeight="8" refX="7" refY="3" orient="auto"><path d="M0,0 L0,6 L7,3 z" fill="#9333ea"/></marker>
+                            </defs>
+                            <rect x="110" y="12" width="200" height="44" rx="8" fill="#1e40af"/><text x="210" y="40" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="600" fill="#fff">User query</text>
+                            <line x1="210" y1="56" x2="210" y2="78" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow-mara)"/>
+                            <rect x="110" y="80" width="200" height="44" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/><text x="210" y="108" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="600" fill="#1f2937">Planner</text>
+                            <line x1="210" y1="124" x2="210" y2="146" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow-mara)"/>
+                            <rect x="110" y="148" width="200" height="44" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/><text x="210" y="176" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="13" font-weight="600" fill="#1f2937">Parallel researchers (N)</text>
+                            <line x1="210" y1="192" x2="210" y2="214" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow-mara)"/>
+                            <rect x="110" y="216" width="200" height="40" rx="8" fill="#f9fafb" stroke="#6b7280" stroke-width="2"/><text x="210" y="242" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600" fill="#1f2937">Aggregate</text>
+                            <line x1="210" y1="256" x2="210" y2="278" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow-mara)"/>
+                            <rect x="110" y="280" width="200" height="40" rx="8" fill="#fef3c7" stroke="#d97706" stroke-width="2"/><text x="210" y="306" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600" fill="#92400e">Critic</text>
+                            <path d="M 310 300 C 360 300 360 200 310 200" fill="none" stroke="#9333ea" stroke-width="2" marker-end="url(#arrow-mara-loop)"/>
+                            <text x="345" y="248" font-family="Inter, system-ui, sans-serif" font-size="10" fill="#7c3aed">More research</text>
+                            <line x1="210" y1="320" x2="210" y2="342" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow-mara)"/>
+                            <rect x="110" y="344" width="200" height="36" rx="8" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/><text x="210" y="368" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600" fill="#1f2937">Synthesizer</text>
+                            <line x1="210" y1="380" x2="210" y2="398" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow-mara)"/>
+                            <rect x="110" y="400" width="200" height="32" rx="8" fill="#f3f4f6" stroke="#6b7280" stroke-width="2"/><text x="210" y="422" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="11" font-weight="600" fill="#374151">Citation check</text>
+                            <line x1="210" y1="432" x2="210" y2="450" stroke="#2563eb" stroke-width="2" marker-end="url(#arrow-mara)"/>
+                            <rect x="110" y="452" width="200" height="36" rx="8" fill="#1e40af"/><text x="210" y="476" text-anchor="middle" font-family="Inter, system-ui, sans-serif" font-size="12" font-weight="600" fill="#fff">Editor → final report</text>
+                        </svg>
+                    </div>
+                    <figcaption class="architecture-caption">Fan-out/fan-in research, bounded critic ↔ follow-up retrieval loop, then synthesis and citation-aware editing.</figcaption>
+                </figure>
+
+                <h4 class="case-study-heading">Observability &amp; guardrails</h4>
+                <ul class="case-study-list">
+                    <li>SQLite-backed <strong>activity trace</strong> per node for debugging and interviews.</li>
+                    <li>Strict per-query <strong>token and cost caps</strong> with conservative fallbacks on parser or search failures.</li>
+                </ul>
+
+                <h4 class="case-study-heading">Visual proof (Streamlit)</h4>
+                <p class="case-study-body">Add high-resolution captures as <code class="inline-code">assets/img/case-studies/mara-ui.png</code> and <code class="inline-code">assets/img/case-studies/mara-trace.png</code> (Agent Activity Trace tab). If images are missing, use the live app link below.</p>
+                <div class="case-study-visual case-study-visual--split">
+                    <figure class="screenshot-block">
+                        <img src="assets/img/case-studies/mara-ui.png" alt="Streamlit UI showing report view" class="case-study-screenshot" width="640" height="400" loading="lazy">
+                        <div class="case-study-visual-fallback" data-fallback-for="mara-ui" hidden>
+                            <p><strong>Report UI</strong> — open the hosted app to explore the full interface.</p>
+                        </div>
+                        <figcaption>Main report experience</figcaption>
+                    </figure>
+                    <figure class="screenshot-block">
+                        <img src="assets/img/case-studies/mara-trace.png" alt="Streamlit Agent Activity Trace tab" class="case-study-screenshot" width="640" height="400" loading="lazy">
+                        <div class="case-study-visual-fallback" data-fallback-for="mara-trace" hidden>
+                            <p><strong>Agent Activity Trace</strong> — demonstrates agents handing work off and validating evidence in the UI.</p>
+                        </div>
+                        <figcaption>Agent activity trace</figcaption>
+                    </figure>
+                </div>
+
+                <div class="case-study-actions">
+                    <a href="https://github.com/Rickyganta/Multi_Agent_Research_Assistant" target="_blank" rel="noopener noreferrer" class="btn btn-primary btn-cta-large">View the source code on GitHub</a>
+                    <a href="https://multiagentresearchassistant-jv66vm73yrqmar376hqzdg.streamlit.app" target="_blank" rel="noopener noreferrer" class="btn btn-secondary btn-cta-large">Open live Streamlit app</a>
+                </div>
+            </article>
         </div>
     </section>
 
@@ -270,7 +450,7 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="container">
-            <p>&copy; 2024 Ricky Johnson Ganta. All rights reserved.</p>
+            <p>&copy; 2026 Ricky Johnson Ganta. All rights reserved.</p>
         </div>
     </footer>
 

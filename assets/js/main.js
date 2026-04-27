@@ -45,9 +45,10 @@ document.addEventListener('DOMContentLoaded', function() {
         sections.forEach(section => {
             const sectionTop = section.offsetTop;
             const sectionHeight = section.offsetHeight;
-            
+            const id = section.getAttribute('id');
+            if (!id) return;
             if (scrollPosition >= sectionTop && scrollPosition < sectionTop + sectionHeight) {
-                current = section.getAttribute('id');
+                current = id;
             }
         });
         
@@ -76,7 +77,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }, observerOptions);
     
-    const revealElements = document.querySelectorAll('.section-title, .about-content, .project-card, .resume-content, .contact-content');
+    const revealElements = document.querySelectorAll('.section-title, .about-content, .project-card, .projects-note, .case-studies-lead, .case-study, .resume-content, .contact-content');
     
     revealElements.forEach((el, index) => {
         el.classList.add('scroll-reveal');
@@ -111,5 +112,15 @@ document.addEventListener('DOMContentLoaded', function() {
         if (hero && scrolled < window.innerHeight) {
             hero.style.transform = `translateY(${scrolled * 0.5}px)`;
         }
+    });
+
+    document.querySelectorAll('.case-study-screenshot').forEach(function (img) {
+        img.addEventListener('error', function () {
+            this.style.display = 'none';
+            var root = this.closest('.case-study-visual, .screenshot-block');
+            if (!root) return;
+            var fb = root.querySelector('.case-study-visual-fallback');
+            if (fb) fb.hidden = false;
+        });
     });
 });
